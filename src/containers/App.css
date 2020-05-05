@@ -1,0 +1,56 @@
+.App {
+  text-align: center;
+}
+
+nav {
+  background: linear-gradient(rgb(97, 104, 110), rgb(77, 81, 85));
+}
+
+.sidebar {
+  height: 89vh;
+}
+
+/* .center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+
+.register-form {
+  width: 60%;
+}
+
+@media screen and (max-width: 992px) {
+  .register-form {
+    width: 85%;
+  }
+}
+
+.scroll {
+  overflow: scroll;
+  height: 88vh;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  position: relative;
+}
+
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+th {
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 2;
+}
