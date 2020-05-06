@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import UserInfo from "./UserInfo";
 import EditProfile from "./EditProfile";
 import ManageCenters from "./Actions/ManageCenters/ManageCenters";
+import ManageUsers from "./Actions/ManageUsers/ManageUsers";
+import ManageStaffs from "./Actions/ManageStaffs/ManageStaffs";
 
 class UserProfile extends Component {
   state = {};
@@ -30,7 +32,7 @@ class UserProfile extends Component {
                   <code>Manage Requested Services</code>
                 </div>
                 <div className="w-90 pa3 dim br3 center grow shadow-5 mt2 pointer bg-blue">
-                  <code>Role4</code>
+                  <code>Manage Users</code>
                 </div>
               </div>
             </div>

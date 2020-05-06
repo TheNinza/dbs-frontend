@@ -1,16 +1,15 @@
 import React, { Component } from "react";
-class center extends Component {
+class User extends Component {
   state = {};
   render() {
     return (
       <React.Fragment>
         <tr>
           <td>1</td>
-          <td>Hospital A</td>
-          <td>Address Assflkhasdoffhweoifhosdifhsoidfnospd</td>
+          <td>User</td>
+          <td>user@example.com</td>
           <td>9876543210</td>
-          <td>123</td>
-          <td>87</td>
+          <td>Admin</td>
           <td>
             <div className="flex justify-center items-center">
               <input
@@ -23,11 +22,6 @@ class center extends Component {
                 value="Delete"
                 className="grow mh2 pointer shadow-5 b bg-transparent f6 red ba b--red"
               />
-              <input
-                type="submit"
-                value="Show Staffs"
-                className="grow mh2 pointer shadow-5 b bg-transparent f6 blue ba b--blue"
-              />
             </div>
           </td>
         </tr>
@@ -36,4 +30,4 @@ class center extends Component {
   }
 }
 
-export default center;
+export default User;
