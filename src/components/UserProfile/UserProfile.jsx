@@ -4,6 +4,8 @@ import EditProfile from "./EditProfile";
 import ManageCenters from "./Actions/ManageCenters/ManageCenters";
 import ManageUsers from "./Actions/ManageUsers/ManageUsers";
 import ManageStaffs from "./Actions/ManageStaffs/ManageStaffs";
+import ManageServices from "./Actions/ManageRequests/ManageRequests";
+import ManageRequests from "./Actions/ManageRequests/ManageRequests";
 
 class UserProfile extends Component {
   state = {};
@@ -39,7 +41,7 @@ class UserProfile extends Component {
           </div>
         </div>
         <div className="fn fl-ns w-80-ns">
-          <ManageCenters />
+          <ManageRequests />
         </div>
       </div>
     );
