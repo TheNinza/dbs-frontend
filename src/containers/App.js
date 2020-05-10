@@ -17,10 +17,10 @@ class App extends Component {
     return (
       <div>
         <Nav />
-        {/* <Home />
+        <Home />
+        {/* 
         <Signin />
-         <QurantineCenters />*/}
-        <UserProfile />
+         <QurantineCenters /><UserProfile />*/}
       </div>
     );
   }
