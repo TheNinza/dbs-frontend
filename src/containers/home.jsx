@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "tachyons";
-import Register from "../components/Register/Register";
+import LoginAs from "../components/LoginAs/LoginAs";
 
 class Home extends Component {
   state = {};
@@ -9,7 +9,7 @@ class Home extends Component {
       <div className="cf ph3 ph5-ns pv5">
         <div className="fn fl-ns w-50-ns pr4-ns">
           <h1 className="mb3 mt0 lh-title">
-            Lend your property as Quarantine Center
+            Welcome to the Quarantine Center Management Center
           </h1>
           <time className="f6 ttu tracked gray">
             <p>
@@ -21,7 +21,7 @@ class Home extends Component {
           </time>
         </div>
         <div className="fn fl-ns w-50-ns">
-          <Register />
+          <LoginAs />
         </div>
       </div>
     );

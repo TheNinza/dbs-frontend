@@ -12,6 +12,7 @@ class QuarantineCenters extends Component {
               <th>Id</th>
               <th>Name</th>
               <th>Address</th>
+              <th>Contact</th>
               <th>Total Beds</th>
               <th>Patients</th>
               <th>Actions</th>

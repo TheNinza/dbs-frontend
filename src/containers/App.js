@@ -5,6 +5,19 @@ import Home from "./home";
 import Signin from "../components/Signin/Signin";
 import UserProfile from "../components/UserProfile/UserProfile";
 import QurantineCenters from "../components/QuarantineCenters/QuarantineCenters";
+import Particles from "react-particles-js";
+
+const particlesOptions = {
+  particles: {
+    number: {
+      value: 30,
+      density: {
+        enable: true,
+        area: 300,
+      },
+    },
+  },
+};
 
 const initialState = {
   route: "register",
@@ -16,11 +29,12 @@ class App extends Component {
   render() {
     return (
       <div>
+        <Particles className="particles" params={particlesOptions} />
         <Nav />
         <Home />
         {/* 
-        <Signin />
-         <QurantineCenters /><UserProfile />*/}
+        <Signin /><UserProfile />
+         <QurantineCenters />*/}
       </div>
     );
   }
