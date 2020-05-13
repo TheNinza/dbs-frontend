@@ -1,22 +1,40 @@
 import React, { Component } from "react";
 
 class LoginAs extends Component {
-  state = {
-    user: "Government Official",
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: {
+        name: "Ram",
+        role: "Government Official",
+        id: 1,
+      },
+    };
+  }
 
-  roledescription = (user) => {
-    if (user === "Government Official") {
+  roledescription = (role) => {
+    if (role === "Government Official") {
       return "The user will be able to manage different quarantine centers, staffs and respond to any request from the center.";
-    } else if (user === "Center Manager") {
+    } else if (role === "Center Manager") {
       return "The user will be able to manage the staffs, patients and send requests of his/her center only.";
-    } else if (user === "Database Administrator") {
+    } else if (role === "Database Administrator") {
       return "The user will be able to manage the managers, government officials can perform all the CRUD operations on the database.";
     }
   };
 
   optionSelect = (event) => {
-    this.setState({ user: event.target.value });
+    this.setState({
+      user: {
+        name: "ram",
+        role: event.target.value,
+        id: 1,
+      },
+    });
+  };
+
+  onLogin = () => {
+    this.props.loadUser(this.state.user);
+    this.props.onRouteChange("userProfile");
   };
 
   render() {
@@ -42,6 +60,7 @@ class LoginAs extends Component {
           </div>
           <div className="tc">
             <input
+              onClick={this.onLogin}
               type="button"
               value="Login"
               className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib shadow-3 br3"
@@ -53,7 +72,7 @@ class LoginAs extends Component {
             <label>Role:</label>
           </div>
           <div className="pa2">
-            <code>{this.roledescription(this.state.user)}</code>
+            <code>{this.roledescription(this.state.user.role)}</code>
           </div>
         </div>
       </div>

@@ -2,9 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import Nav from "../components/Nav/Nav";
 import Home from "./home";
-import Signin from "../components/Signin/Signin";
 import UserProfile from "../components/UserProfile/UserProfile";
-import QurantineCenters from "../components/QuarantineCenters/QuarantineCenters";
 import Particles from "react-particles-js";
 
 const particlesOptions = {
@@ -20,22 +18,49 @@ const particlesOptions = {
 };
 
 const initialState = {
-  route: "register",
+  user: {
+    name: "",
+    role: "",
+    id: 0,
+  },
+  isSignedIn: false,
+  route: "home",
 };
 
 class App extends Component {
   state = initialState;
 
+  loadUser = (data) => {
+    this.setState({
+      user: {
+        name: data.name,
+        role: data.role,
+        id: data.id,
+      },
+    });
+  };
+
+  onRouteChange = (route) => {
+    if (route === "home") {
+      this.setState(initialState);
+    } else if (route === "userProfile") {
+      this.setState({ isSignedIn: true });
+    }
+    this.setState({ route });
+  };
+
   render() {
+    const { isSignedIn, user, route } = this.state;
     return (
       <div>
         <Particles className="particles" params={particlesOptions} />
-        <Nav />
+        <Nav isSignedIn={isSignedIn} onRouteChange={this.onRouteChange} />
 
-        <Home />
-        {/* 
-        <Signin /><UserProfile />
-         <QurantineCenters />*/}
+        {route === "home" ? (
+          <Home onRouteChange={this.onRouteChange} loadUser={this.loadUser} />
+        ) : (
+          <UserProfile user={user} />
+        )}
       </div>
     );
   }
