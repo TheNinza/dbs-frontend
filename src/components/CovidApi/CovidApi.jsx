@@ -8,14 +8,15 @@ class CovidApi extends Component {
   };
 
   componentDidMount() {
-    fetch("https://api.covid19api.com/country/india")
+    fetch("https://api.covid19india.org/data.json")
       .then((response) => response.json())
       .then((data) => {
-        const element = data[data.length - 1];
+        console.log(data);
+        const element = data.statewise[0];
         this.setState({
-          confirmed: element.Confirmed,
-          recovered: element.Recovered,
-          deaths: element.Deaths,
+          confirmed: element.confirmed,
+          recovered: element.recovered,
+          deaths: element.deaths,
         });
       });
   }
