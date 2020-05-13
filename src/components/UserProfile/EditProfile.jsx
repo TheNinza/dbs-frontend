@@ -7,9 +7,9 @@ class EditProfile extends Component {
       <div>
         <div className="register-form center br3 shadow-2 mt3">
           <main className="pa4 black-80">
-            <div className="measure ">
+            <div className="w-80 center">
               <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
-                <legend className="f1 fw6 ph0 mh0">
+                <legend className="f1 fw6 ph0 mh0 tc">
                   Enter Updated Details
                 </legend>
                 <code>(Enter the fields that you want to update)</code>
@@ -33,17 +33,6 @@ class EditProfile extends Component {
                     type="email"
                     name="email-address"
                     id="email-address"
-                  />
-                </div>
-                <div className="mv3">
-                  <label className="db fw6 lh-copy f6" htmlFor="password">
-                    Password
-                  </label>
-                  <input
-                    className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
-                    type="password"
-                    name="password"
-                    id="password"
                   />
                 </div>
                 <div className="mv3">

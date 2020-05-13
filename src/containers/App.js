@@ -25,6 +25,7 @@ const initialState = {
   },
   isSignedIn: false,
   route: "home",
+  profileRoute: "userInfo",
 };
 
 class App extends Component {
@@ -49,8 +50,12 @@ class App extends Component {
     this.setState({ route });
   };
 
+  onProfileRouteChange = (profileRoute) => {
+    this.setState({ profileRoute });
+  };
+
   render() {
-    const { isSignedIn, user, route } = this.state;
+    const { isSignedIn, user, route, profileRoute } = this.state;
     return (
       <div>
         <Particles className="particles" params={particlesOptions} />
@@ -59,7 +64,11 @@ class App extends Component {
         {route === "home" ? (
           <Home onRouteChange={this.onRouteChange} loadUser={this.loadUser} />
         ) : (
-          <UserProfile user={user} />
+          <UserProfile
+            user={user}
+            profileRoute={profileRoute}
+            onProfileRouteChange={this.onProfileRouteChange}
+          />
         )}
       </div>
     );
