@@ -7,7 +7,6 @@ const Nav = ({ isSignedIn, onRouteChange }) => {
         Quarantine Center Management Tool
       </div>
       <div className="dtc v-mid w-75 tr">
-        {/* <CovidApi /> */}
         <div
           onClick={() => onRouteChange("home")}
           className="grow link dim light-gray f6 f5-ns dib mr3 mr4-ns pointer"

@@ -10,33 +10,33 @@ class ManageStaffs extends Component {
 
   render() {
     return (
-      // <div>
-      //   <div className="new-center">
-      //     <div className="w-10 tc pa2 mt3 br3 grow bg-blue white b pointer shadow-5">
-      //       Add New Staff
-      //     </div>
-      //   </div>
-      //   <div className="scroll">
-      //     <table className="mt3">
-      //       <thead>
-      //         <tr>
-      //           <th>Id</th>
-      //           <th>Name</th>
-      //           <th>Role</th>
-      //           <th>Phone</th>
-      //           <th>Address</th>
-      //           <th>Working-Hours</th>
-      //           <th>Actions</th>
-      //         </tr>
-      //       </thead>
-      //       <tbody>
-      //         <Staff />
-      //       </tbody>
-      //     </table>
-      //   </div>
-      // </div>
+      <div>
+        <div className="new-center">
+          <div className="w-10 tc pa2 mt3 br3 grow bg-blue white b pointer shadow-5">
+            Add New Staff
+          </div>
+        </div>
+        <div className="scroll">
+          <table className="mt3">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Role</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>Working-Hours</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <Staff />
+            </tbody>
+          </table>
+        </div>
+      </div>
       // <EditStaff />
-      <NewStaff />
+      // <NewStaff />
     );
   }
 }
