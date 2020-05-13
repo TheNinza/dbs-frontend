@@ -1,4 +1,5 @@
 import React from "react";
+import CovidApi from "../CovidApi/CovidApi";
 
 const Nav = () => {
   return (
@@ -7,6 +8,7 @@ const Nav = () => {
         Quarantine Center Management Tool
       </div>
       <div className="dtc v-mid w-75 tr">
+        {/* <CovidApi /> */}
         <div className="grow link dim light-gray f6 f5-ns dib mr3 mr4-ns pointer">
           Login
         </div>

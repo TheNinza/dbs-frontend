@@ -31,9 +31,10 @@ class App extends Component {
       <div>
         <Particles className="particles" params={particlesOptions} />
         <Nav />
-        <UserProfile />
+
+        <Home />
         {/* 
-        <Signin /><Home />
+        <Signin /><UserProfile />
          <QurantineCenters />*/}
       </div>
     );
