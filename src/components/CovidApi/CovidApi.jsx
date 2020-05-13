@@ -24,13 +24,13 @@ class CovidApi extends Component {
   render() {
     const api = (
       <div className="pa2 f3 fw4">
-        <div className="shadow-3 mt3 br3 pa2 pointer grow">
+        <div className="shadow-3 mt3 br3 pa2 pointer grow hover-bg-gold">
           Confirmed:{` ${this.state.confirmed}`}
         </div>
-        <div className="shadow-3 mt3 br3 pa2 pointer grow">
+        <div className="shadow-3 mt3 br3 pa2 pointer grow hover-bg-green">
           Recovered:{` ${this.state.recovered}`}
         </div>
-        <div className="shadow-3 mt3 br3 pa2 pointer grow">
+        <div className="shadow-3 mt3 br3 pa2 pointer grow hover-bg-red">
           Deaths:{` ${this.state.deaths}`}
         </div>
       </div>
