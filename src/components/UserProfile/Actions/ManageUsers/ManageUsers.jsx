@@ -4,15 +4,13 @@ import EditUser from "./EditUser";
 import NewUser from "./NewUser";
 
 class ManageUsers extends Component {
-  state = {
-    array: [],
-  };
-
-  // sayhello = () => {
-  //   console.log("hello");
-  // };
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
 
   render() {
+    const { user, onProfileRouteChange } = this.props;
     return (
       <div>
         <div className="new-center">

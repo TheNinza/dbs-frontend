@@ -11,7 +11,6 @@ class CovidApi extends Component {
     fetch("https://api.covid19india.org/data.json")
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         const element = data.statewise[0];
         this.setState({
           confirmed: element.confirmed,

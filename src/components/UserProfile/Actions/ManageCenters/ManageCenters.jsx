@@ -1,21 +1,31 @@
 import React, { Component } from "react";
 import Center from "./center";
-import EditCenter from "./EditCenter";
-import NewCenter from "./NewCenter";
 
 class ManageCenters extends Component {
-  state = {
-    array: [],
-  };
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
 
   render() {
+    const { user, onProfileRouteChange } = this.props;
     return (
       <div>
-        <div className="new-center">
-          <div className="w-10 tc pa2 mt3 br3 grow bg-blue white b pointer shadow-5">
-            Add New Center
+        {user.role !== "Center Manager" ? (
+          <div className="new-center">
+            <div
+              onClick={() => {
+                onProfileRouteChange("newCenter");
+              }}
+              className="w-10 tc pa2 mt3 br3 grow bg-blue white b pointer shadow-5"
+            >
+              Add New Center
+            </div>
           </div>
-        </div>
+        ) : (
+          <React.Fragment></React.Fragment>
+        )}
+
         <div className="scroll">
           <table className="mt3">
             <thead>
@@ -35,8 +45,6 @@ class ManageCenters extends Component {
           </table>
         </div>
       </div>
-      // <EditCenter />
-      // <NewCenter />
     );
   }
 }

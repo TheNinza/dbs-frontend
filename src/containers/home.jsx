@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import "tachyons";
 import LoginAs from "../components/LoginAs/LoginAs";
 import CovidApi from "../components/CovidApi/CovidApi";

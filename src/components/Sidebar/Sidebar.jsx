@@ -47,14 +47,18 @@ const Sidebar = ({ user, onProfileRouteChange }) => {
           >
             <code>Manage Requested Services</code>
           </div>
-          <div
-            onClick={() => {
-              onProfileRouteChange("manageUsers");
-            }}
-            className="w-90 pa3 dim br3 center grow shadow-3 mt2 pointer bg-blue"
-          >
-            <code>Manage Users</code>
-          </div>
+          {user.role === "Database Administrator" ? (
+            <div
+              onClick={() => {
+                onProfileRouteChange("manageUsers");
+              }}
+              className="w-90 pa3 dim br3 center grow shadow-3 mt2 pointer bg-blue"
+            >
+              <code>Manage Users</code>
+            </div>
+          ) : (
+            <React.Fragment></React.Fragment>
+          )}
         </div>
       </div>
     </div>

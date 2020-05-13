@@ -5,8 +5,11 @@ import EditProfile from "./EditProfile";
 import ManageCenters from "./Actions/ManageCenters/ManageCenters";
 import ManageUsers from "./Actions/ManageUsers/ManageUsers";
 import ManageStaffs from "./Actions/ManageStaffs/ManageStaffs";
-import ManageServices from "./Actions/ManageRequests/ManageRequests";
 import ManageRequests from "./Actions/ManageRequests/ManageRequests";
+import NewCenter from "./Actions/ManageCenters/NewCenter";
+import NewStaff from "./Actions/ManageStaffs/NewStaff";
+import NewRequest from "./Actions/ManageRequests/NewRequest";
+import NewUser from "./Actions/ManageUsers/NewUser";
 
 const initialstate = {};
 
@@ -28,13 +31,33 @@ class UserProfile extends Component {
           ) : profileRoute === "editProfile" ? (
             <EditProfile />
           ) : profileRoute === "manageCenters" ? (
-            <ManageCenters />
+            <ManageCenters
+              user={user}
+              onProfileRouteChange={onProfileRouteChange}
+            />
           ) : profileRoute === "manageStaffs" ? (
-            <ManageStaffs />
+            <ManageStaffs
+              user={user}
+              onProfileRouteChange={onProfileRouteChange}
+            />
           ) : profileRoute === "manageUsers" ? (
-            <ManageUsers />
+            <ManageUsers
+              user={user}
+              onProfileRouteChange={onProfileRouteChange}
+            />
           ) : profileRoute === "manageRequests" ? (
-            <ManageRequests />
+            <ManageRequests
+              user={user}
+              onProfileRouteChange={onProfileRouteChange}
+            />
+          ) : profileRoute === "newCenter" ? (
+            <NewCenter />
+          ) : profileRoute === "newStaff" ? (
+            <NewStaff />
+          ) : profileRoute === "newRequest" ? (
+            <NewRequest />
+          ) : profileRoute === "newUser" ? (
+            <NewUser />
           ) : (
             ""
           )}

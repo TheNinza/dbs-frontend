@@ -1,19 +1,30 @@
 import React, { Component } from "react";
 import Request from "./Request";
-import NewRequest from "./NewRequest";
 
 class ManageRequests extends Component {
-  state = {
-    array: [],
-  };
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
 
   render() {
+    const { user, onProfileRouteChange } = this.props;
     return (
       <div>
-        <div className="new-center">
-          <div className="w-10 tc pa2 mt3 br3 grow bg-blue white b pointer shadow-5">
-            Add New Request
-          </div>
+        <div className="new-request">
+          {user.role !== "Government Official" ? (
+            <div
+              onClick={() => {
+                onProfileRouteChange("newRequest");
+              }}
+              className="w-10 tc pa2 mt3 br3 grow bg-blue white b pointer shadow-5"
+            >
+              Add New Request
+            </div>
+          ) : (
+            <React.Fragment></React.Fragment>
+          )}
+
           <div className="mt2">
             <label htmlFor="filters" className="mt3 f3 fw-3">
               Filters:
@@ -53,8 +64,6 @@ class ManageRequests extends Component {
           </table>
         </div>
       </div>
-      // <EditRequest />
-      // <NewRequest />
     );
   }
 }
