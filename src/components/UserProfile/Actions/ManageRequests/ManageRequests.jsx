@@ -24,7 +24,8 @@ class ManageRequests extends Component {
           ) : (
             <React.Fragment></React.Fragment>
           )}
-
+        </div>
+        {user.role !== "Center Manager" ? (
           <div className="mt2">
             <label htmlFor="filters" className="mt3 f3 fw-3">
               Filters:
@@ -46,7 +47,10 @@ class ManageRequests extends Component {
               </div>
             </div>
           </div>
-        </div>
+        ) : (
+          ""
+        )}
+
         <div className="scroll-req">
           <table className="mt3">
             <thead>
@@ -59,7 +63,7 @@ class ManageRequests extends Component {
               </tr>
             </thead>
             <tbody>
-              <Request />
+              <Request user={user} />
             </tbody>
           </table>
         </div>

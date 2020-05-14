@@ -23,14 +23,19 @@ const Sidebar = ({ user, onProfileRouteChange }) => {
           </div>
         </div>
         <div className="actions fw4 mt4">
-          <div
-            onClick={() => {
-              onProfileRouteChange("manageCenters");
-            }}
-            className="w-90 pa3 dim br3 center grow shadow-3 mt2 pointer bg-blue"
-          >
-            <code>Manage Quarantine Centers</code>
-          </div>
+          {user.role !== "Center Manager" ? (
+            <div
+              onClick={() => {
+                onProfileRouteChange("manageCenters");
+              }}
+              className="w-90 pa3 dim br3 center grow shadow-3 mt2 pointer bg-blue"
+            >
+              <code>Manage Quarantine Centers</code>
+            </div>
+          ) : (
+            ""
+          )}
+
           <div
             onClick={() => {
               onProfileRouteChange("managePatients");
