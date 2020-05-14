@@ -40,7 +40,7 @@ class ManageStaffs extends Component {
               </tr>
             </thead>
             <tbody>
-              <Staff />
+              <Staff user={user} onProfileRouteChange={onProfileRouteChange} />
             </tbody>
           </table>
         </div>

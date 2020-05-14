@@ -1,7 +1,12 @@
 import React, { Component } from "react";
 class User extends Component {
-  state = {};
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
   render() {
+    const { onProfileRouteChange } = this.props;
     return (
       <React.Fragment>
         <tr>
@@ -13,6 +18,9 @@ class User extends Component {
           <td>
             <div className="flex justify-center items-center">
               <input
+                onClick={() => {
+                  onProfileRouteChange("editCenter");
+                }}
                 type="submit"
                 value="Edit"
                 className="grow mh2 pointer shadow-5 b ba b--black bg-transparent f6"

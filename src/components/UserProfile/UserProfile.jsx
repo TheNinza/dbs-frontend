@@ -2,16 +2,23 @@ import React, { Component } from "react";
 import Sidebar from "../Sidebar/Sidebar";
 import UserInfo from "./UserInfo";
 import EditProfile from "./EditProfile";
+
 import ManageCenters from "./Actions/ManageCenters/ManageCenters";
 import ManageUsers from "./Actions/ManageUsers/ManageUsers";
 import ManageStaffs from "./Actions/ManageStaffs/ManageStaffs";
 import ManagePatients from "./Actions/ManagePatients/ManagePatients";
 import ManageRequests from "./Actions/ManageRequests/ManageRequests";
+
 import NewCenter from "./Actions/ManageCenters/NewCenter";
 import NewStaff from "./Actions/ManageStaffs/NewStaff";
 import NewRequest from "./Actions/ManageRequests/NewRequest";
 import NewUser from "./Actions/ManageUsers/NewUser";
 import NewPatient from "./Actions/ManagePatients/NewPatient";
+
+import EditCenter from "./Actions/ManageCenters/EditCenter";
+import EditPatient from "./Actions/ManagePatients/EditPatient";
+import EditStaff from "./Actions/ManageStaffs/EditStaff";
+import EditUser from "./Actions/ManageUsers/EditUser";
 
 const initialstate = {};
 
@@ -67,6 +74,14 @@ class UserProfile extends Component {
             <NewPatient />
           ) : profileRoute === "newUser" ? (
             <NewUser />
+          ) : profileRoute === "editCenter" ? (
+            <EditCenter />
+          ) : profileRoute === "editPatient" ? (
+            <EditPatient />
+          ) : profileRoute === "editStaff" ? (
+            <EditStaff />
+          ) : profileRoute === "editUser" ? (
+            <EditUser />
           ) : (
             ""
           )}

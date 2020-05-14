@@ -40,7 +40,7 @@ class ManageCenters extends Component {
               </tr>
             </thead>
             <tbody>
-              <Center />
+              <Center user={user} onProfileRouteChange={onProfileRouteChange} />
             </tbody>
           </table>
         </div>

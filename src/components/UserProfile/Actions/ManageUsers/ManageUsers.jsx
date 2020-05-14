@@ -8,6 +8,7 @@ class ManageUsers extends Component {
   }
 
   render() {
+    const { onProfileRouteChange } = this.props;
     return (
       <div>
         <div className="new-center">
@@ -28,7 +29,7 @@ class ManageUsers extends Component {
               </tr>
             </thead>
             <tbody>
-              <User />
+              <User onProfileRouteChange={onProfileRouteChange} />
             </tbody>
           </table>
         </div>

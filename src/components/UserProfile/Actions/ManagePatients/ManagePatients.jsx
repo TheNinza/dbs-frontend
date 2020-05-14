@@ -8,7 +8,7 @@ class ManagePatients extends Component {
   }
 
   render() {
-    const { onProfileRouteChange } = this.props;
+    const { user, onProfileRouteChange } = this.props;
     return (
       <div>
         <div className="new-Patient">
@@ -36,7 +36,10 @@ class ManagePatients extends Component {
               </tr>
             </thead>
             <tbody>
-              <Patient />
+              <Patient
+                user={user}
+                onProfileRouteChange={onProfileRouteChange}
+              />
             </tbody>
           </table>
         </div>
