@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import User from "./User";
-import EditUser from "./EditUser";
-import NewUser from "./NewUser";
 
 class ManageUsers extends Component {
   constructor(props) {
@@ -10,7 +8,6 @@ class ManageUsers extends Component {
   }
 
   render() {
-    const { user, onProfileRouteChange } = this.props;
     return (
       <div>
         <div className="new-center">
@@ -36,8 +33,6 @@ class ManageUsers extends Component {
           </table>
         </div>
       </div>
-      // <EditUser />
-      // <NewUser />
     );
   }
 }

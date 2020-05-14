@@ -5,11 +5,13 @@ import EditProfile from "./EditProfile";
 import ManageCenters from "./Actions/ManageCenters/ManageCenters";
 import ManageUsers from "./Actions/ManageUsers/ManageUsers";
 import ManageStaffs from "./Actions/ManageStaffs/ManageStaffs";
+import ManagePatients from "./Actions/ManagePatients/ManagePatients";
 import ManageRequests from "./Actions/ManageRequests/ManageRequests";
 import NewCenter from "./Actions/ManageCenters/NewCenter";
 import NewStaff from "./Actions/ManageStaffs/NewStaff";
 import NewRequest from "./Actions/ManageRequests/NewRequest";
 import NewUser from "./Actions/ManageUsers/NewUser";
+import NewPatient from "./Actions/ManagePatients/NewPatient";
 
 const initialstate = {};
 
@@ -50,12 +52,19 @@ class UserProfile extends Component {
               user={user}
               onProfileRouteChange={onProfileRouteChange}
             />
+          ) : profileRoute === "managePatients" ? (
+            <ManagePatients
+              user={user}
+              onProfileRouteChange={onProfileRouteChange}
+            />
           ) : profileRoute === "newCenter" ? (
             <NewCenter />
           ) : profileRoute === "newStaff" ? (
             <NewStaff />
           ) : profileRoute === "newRequest" ? (
             <NewRequest />
+          ) : profileRoute === "newPatient" ? (
+            <NewPatient />
           ) : profileRoute === "newUser" ? (
             <NewUser />
           ) : (

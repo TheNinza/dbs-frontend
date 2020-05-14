@@ -33,6 +33,14 @@ const Sidebar = ({ user, onProfileRouteChange }) => {
           </div>
           <div
             onClick={() => {
+              onProfileRouteChange("managePatients");
+            }}
+            className="w-90 pa3 dim br3 center grow shadow-3 mt2 pointer bg-blue"
+          >
+            <code>Manage Patients</code>
+          </div>
+          <div
+            onClick={() => {
               onProfileRouteChange("manageStaffs");
             }}
             className="w-90 pa3 dim br3 center grow shadow-3 mt2 pointer bg-blue"
