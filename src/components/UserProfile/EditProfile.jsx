@@ -1,7 +1,37 @@
 import React, { Component } from "react";
 
 class EditProfile extends Component {
-  state = {};
+  constructor(props) {
+    super(props);
+    this.state = {
+      user_id: 6,
+      user_name: "",
+      user_email: "",
+      user_phone: "",
+      user_role: "",
+    };
+  }
+
+  onNameChange = (event) => {
+    this.setState({ user_name: event.target.value });
+  };
+
+  onEmailChange = (event) => {
+    this.setState({ user_email: event.target.value });
+  };
+
+  onPhoneChange = (event) => {
+    this.setState({ user_phone: event.target.value });
+  };
+
+  onRoleChange = (event) => {
+    this.setState({ user_role: event.target.value });
+  };
+
+  onButtonSubmit = () => {
+    console.log(this.state);
+  };
+
   render() {
     return (
       <div>
@@ -18,6 +48,7 @@ class EditProfile extends Component {
                     Name
                   </label>
                   <input
+                    onChange={this.onNameChange}
                     className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
                     type="text"
                     name="name"
@@ -29,6 +60,7 @@ class EditProfile extends Component {
                     Email
                   </label>
                   <input
+                    onChange={this.onEmailChange}
                     className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
                     type="email"
                     name="email-address"
@@ -40,15 +72,30 @@ class EditProfile extends Component {
                     Phone
                   </label>
                   <input
+                    onChange={this.onPhoneChange}
                     className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
                     type="text"
                     name="phone"
                     id="phone"
                   />
                 </div>
+
+                <div className="mv3">
+                  <label className="db fw6 lh-copy f6" htmlFor="Role">
+                    Role
+                  </label>
+                  <input
+                    onChange={this.onRoleChange}
+                    className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+                    type="text"
+                    name="Role"
+                    id="Role"
+                  />
+                </div>
               </fieldset>
               <div className="flex">
                 <input
+                  onClick={this.onButtonSubmit}
                   className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
                   type="submit"
                   value="Submit"
