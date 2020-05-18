@@ -7,6 +7,7 @@ class ManageRequests extends Component {
     this.state = {
       requests: [],
       center_id: "",
+      filter: "",
     };
   }
 
@@ -44,6 +45,30 @@ class ManageRequests extends Component {
       .catch((err) => console.log(err));
   }
 
+  onfilter = (event) => {
+    this.updatelist();
+    this.setState({ filter: event.target.value });
+    if (this.state.filter === "Unsolved") {
+      const temp = this.state.requests.filter((req) => {
+        return req.status_id === 1;
+      });
+      console.log(temp);
+      this.setState({ requests: temp });
+    } else if (this.state.filter === "Processed") {
+      const temp = this.state.requests.filter((req) => {
+        return req.status_id === 2;
+      });
+      console.log(temp);
+      this.setState({ requests: temp });
+    } else if (this.state.filter === "Discarded") {
+      const temp = this.state.requests.filter((req) => {
+        return req.status_id === 3;
+      });
+      console.log(temp);
+      this.setState({ requests: temp });
+    } else this.updatelist();
+  };
+
   render() {
     const { user, onProfileRouteChange, sendData } = this.props;
     return (
@@ -72,7 +97,7 @@ class ManageRequests extends Component {
                 <label htmlFor="request-status" className="mh2">
                   Request Status
                 </label>
-                <select id="status" name="status">
+                <select onClick={this.onfilter} id="status" name="status">
                   <option value="All">All</option>
                   <option value="Unsolved">Unsolved</option>
                   <option value="Processed">Processed</option>
@@ -88,7 +113,7 @@ class ManageRequests extends Component {
         <div className="scroll-req">
           <table className="mt3">
             <thead>
-              <tr className="o-85">
+              <tr>
                 <th>Request Id</th>
                 <th>Quarantine Center</th>
                 <th>Request Descreption</th>

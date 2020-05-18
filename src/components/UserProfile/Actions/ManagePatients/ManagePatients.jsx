@@ -6,8 +6,24 @@ class ManagePatients extends Component {
     super(props);
     this.state = {
       patients: [],
+      center_id: "",
     };
   }
+
+  setCenterId = () => {
+    fetch("http://localhost:3000/getcenteruser", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        user_id: this.props.user.user_id,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        this.setState({ center_id: data.center_id });
+      })
+      .catch((err) => console.log("error", err));
+  };
 
   updatelist = () => {
     fetch("http://localhost:3000/patient")
@@ -19,6 +35,7 @@ class ManagePatients extends Component {
   };
 
   componentDidMount() {
+    this.setCenterId();
     fetch("http://localhost:3000/patient")
       .then((response) => response.json())
       .then((patients) => {
@@ -27,7 +44,9 @@ class ManagePatients extends Component {
             (patient) => patient.center_id === this.props.data
           );
           this.setState({ patients: temp });
-        } else this.setState({ patients: patients });
+        } else {
+          this.setState({ patients: patients });
+        }
       })
       .catch((err) => console.log(err));
   }
@@ -71,17 +90,33 @@ class ManagePatients extends Component {
             </thead>
             <tbody>
               {this.state.patients.map((patient) => {
-                return (
-                  <Patient
-                    key={patient.patient_id}
-                    sendData={sendData}
-                    user={user}
-                    onProfileRouteChange={onProfileRouteChange}
-                    patient={patient}
-                    updatelist={this.updatelist}
-                    profileRoute={profileRoute}
-                  />
-                );
+                if (user.user_role_name === "Center Manager") {
+                  if (this.state.center_id === patient.center_id) {
+                    return (
+                      <Patient
+                        key={patient.patient_id}
+                        sendData={sendData}
+                        user={user}
+                        onProfileRouteChange={onProfileRouteChange}
+                        patient={patient}
+                        updatelist={this.updatelist}
+                        profileRoute={profileRoute}
+                      />
+                    );
+                  } else return null;
+                } else {
+                  return (
+                    <Patient
+                      key={patient.patient_id}
+                      sendData={sendData}
+                      user={user}
+                      onProfileRouteChange={onProfileRouteChange}
+                      patient={patient}
+                      updatelist={this.updatelist}
+                      profileRoute={profileRoute}
+                    />
+                  );
+                }
               })}
             </tbody>
           </table>

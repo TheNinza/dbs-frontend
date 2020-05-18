@@ -6,8 +6,24 @@ class ManageStaffs extends Component {
     super(props);
     this.state = {
       staffs: [],
+      center_id: "",
     };
   }
+
+  setCenterId = () => {
+    fetch("http://localhost:3000/getcenteruser", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        user_id: this.props.user.user_id,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        this.setState({ center_id: data.center_id });
+      })
+      .catch((err) => console.log("error", err));
+  };
 
   updatelist = () => {
     fetch("http://localhost:3000/staff")
@@ -19,6 +35,7 @@ class ManageStaffs extends Component {
   };
 
   componentDidMount() {
+    this.setCenterId();
     fetch("http://localhost:3000/staff")
       .then((response) => response.json())
       .then((staffs) => {
@@ -70,17 +87,33 @@ class ManageStaffs extends Component {
             </thead>
             <tbody>
               {this.state.staffs.map((staff) => {
-                return (
-                  <Staff
-                    key={staff.staff_id}
-                    sendData={sendData}
-                    user={user}
-                    onProfileRouteChange={onProfileRouteChange}
-                    staff={staff}
-                    updatelist={this.updatelist}
-                    profileRoute={profileRoute}
-                  />
-                );
+                if (user.user_role_name === "Center Manager") {
+                  if (this.state.center_id === staff.center_id) {
+                    return (
+                      <Staff
+                        key={staff.staff_id}
+                        sendData={sendData}
+                        user={user}
+                        onProfileRouteChange={onProfileRouteChange}
+                        staff={staff}
+                        updatelist={this.updatelist}
+                        profileRoute={profileRoute}
+                      />
+                    );
+                  } else return null;
+                } else {
+                  return (
+                    <Staff
+                      key={staff.staff_id}
+                      sendData={sendData}
+                      user={user}
+                      onProfileRouteChange={onProfileRouteChange}
+                      staff={staff}
+                      updatelist={this.updatelist}
+                      profileRoute={profileRoute}
+                    />
+                  );
+                }
               })}
             </tbody>
           </table>
