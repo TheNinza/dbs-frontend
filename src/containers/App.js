@@ -18,11 +18,7 @@ const particlesOptions = {
 };
 
 const initialState = {
-  user: {
-    name: "",
-    role: "",
-    id: 0,
-  },
+  user: {},
   isSignedIn: false,
   route: "home",
   profileRoute: "userInfo",
@@ -33,11 +29,7 @@ class App extends Component {
 
   loadUser = (data) => {
     this.setState({
-      user: {
-        name: data.name,
-        role: data.role,
-        id: data.id,
-      },
+      user: data,
     });
   };
 

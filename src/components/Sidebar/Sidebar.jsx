@@ -11,7 +11,7 @@ const Sidebar = ({ user, onProfileRouteChange }) => {
             }}
             className="w-90 pa3 dim center br3 grow shadow-3 mt2 pointer bg-red"
           >
-            <code> {user.name} </code>
+            <code> {user.user_name} </code>
           </div>
           <div
             onClick={() => {

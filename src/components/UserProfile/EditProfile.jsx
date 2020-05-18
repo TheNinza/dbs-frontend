@@ -4,11 +4,12 @@ class EditProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user_id: 6,
+      user_id: this.props.user.user_id,
       user_name: "",
       user_email: "",
       user_phone: "",
       user_role: "",
+      updated: false,
     };
   }
 
@@ -24,12 +25,25 @@ class EditProfile extends Component {
     this.setState({ user_phone: event.target.value });
   };
 
-  onRoleChange = (event) => {
-    this.setState({ user_role: event.target.value });
-  };
-
   onButtonSubmit = () => {
-    console.log(this.state);
+    fetch("http://localhost:3000/editProfile", {
+      method: "put",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        user_name: this.state.user_name,
+        user_email: this.state.user_email,
+        user_id: this.state.user_id,
+        user_phone: this.state.user_phone,
+        user_role: this.state.user_role,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.user_id) {
+          this.setState({ updated: true });
+        }
+      })
+      .catch((err) => console.log("error", err));
   };
 
   render() {
@@ -79,31 +93,19 @@ class EditProfile extends Component {
                     id="phone"
                   />
                 </div>
-
-                <div className="mv3">
-                  <label className="db fw6 lh-copy f6" htmlFor="Role">
-                    Role
-                  </label>
-                  <input
-                    onChange={this.onRoleChange}
-                    className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
-                    type="text"
-                    name="Role"
-                    id="Role"
-                  />
-                </div>
               </fieldset>
+              <div>
+                <code className="tc red fw5">
+                  {" "}
+                  {this.state.updated ? "Updated Successfully" : ""}
+                </code>
+              </div>
               <div className="flex">
                 <input
                   onClick={this.onButtonSubmit}
                   className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
                   type="submit"
                   value="Submit"
-                />
-                <input
-                  className="b ph3 mh4 pv2 input-reset ba b--red bg-transparent grow pointer f6 dib red"
-                  type="submit"
-                  value="Delete Account"
                 />
               </div>
             </div>

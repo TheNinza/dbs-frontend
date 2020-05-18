@@ -4,11 +4,9 @@ class LoginAs extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: {
-        name: "Ram",
-        role: "Government Official",
-        id: 1,
-      },
+      user: {},
+      user_role_name: "Government Official",
+      password: "",
     };
   }
 
@@ -23,18 +21,28 @@ class LoginAs extends Component {
   };
 
   optionSelect = (event) => {
-    this.setState({
-      user: {
-        name: "ram",
-        role: event.target.value,
-        id: 1,
-      },
-    });
+    this.setState({ user_role_name: event.target.value });
+  };
+
+  onUpdatePass = (event) => {
+    this.setState({ password: event.target.value });
   };
 
   onLogin = () => {
-    this.props.loadUser(this.state.user);
-    this.props.onRouteChange("userProfile");
+    fetch("http://localhost:3000/login", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        user_role_name: this.state.user_role_name,
+        password: this.state.password,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        this.props.loadUser(data);
+        this.props.onRouteChange("userProfile");
+      })
+      .catch((err) => console.log(err));
   };
 
   render() {
@@ -58,7 +66,19 @@ class LoginAs extends Component {
               </option>
             </select>
           </div>
-          <div className="tc">
+          <div className="mt3">
+            <label className="db fw6 lh-copy f6" htmlFor="login-pass">
+              Login Password
+            </label>
+            <input
+              onChange={this.onUpdatePass}
+              className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+              type="password"
+              name="login-password"
+              id="login-password"
+            />
+          </div>
+          <div className="tc mt2">
             <input
               onClick={this.onLogin}
               type="button"
@@ -67,12 +87,12 @@ class LoginAs extends Component {
             />
           </div>
         </div>
-        <div className="ba mt5 mh2 br3 pa2">
+        <div className="ba mt3 mh2 br3 pa2">
           <div className="tc f4 underline">
             <label>Role:</label>
           </div>
           <div className="pa2">
-            <code>{this.roledescription(this.state.user.role)}</code>
+            <code>{this.roledescription(this.state.user_role_name)}</code>
           </div>
         </div>
       </div>

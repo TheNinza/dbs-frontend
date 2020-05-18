@@ -38,7 +38,10 @@ class UserProfile extends Component {
           {profileRoute === "userInfo" ? (
             <UserInfo user={user} />
           ) : profileRoute === "editProfile" ? (
-            <EditProfile />
+            <EditProfile
+              user={user}
+              onProfileRouteChange={onProfileRouteChange}
+            />
           ) : profileRoute === "manageCenters" ? (
             <ManageCenters
               user={user}
