@@ -4,11 +4,48 @@ import Request from "./Request";
 class ManageRequests extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      requests: [],
+      center_id: "",
+    };
+  }
+
+  setCenterId = () => {
+    fetch("http://localhost:3000/getcenteruser", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        user_id: this.props.user.user_id,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        this.setState({ center_id: data.center_id });
+      })
+      .catch((err) => console.log("error", err));
+  };
+
+  updatelist = () => {
+    fetch("http://localhost:3000/request")
+      .then((response) => response.json())
+      .then((requests) => {
+        this.setState({ requests });
+      })
+      .catch((err) => console.log(err));
+  };
+
+  componentDidMount() {
+    this.setCenterId();
+    fetch("http://localhost:3000/request")
+      .then((response) => response.json())
+      .then((requests) => {
+        this.setState({ requests });
+      })
+      .catch((err) => console.log(err));
   }
 
   render() {
-    const { user, onProfileRouteChange } = this.props;
+    const { user, onProfileRouteChange, sendData } = this.props;
     return (
       <div>
         <div className="new-request">
@@ -31,9 +68,6 @@ class ManageRequests extends Component {
               Filters:
             </label>
             <div className="flex">
-              <div className="mh2 pa2 ba">
-                <input type="text" placeholder="Quarantine Center" />
-              </div>
               <div className="ba pa2">
                 <label htmlFor="request-status" className="mh2">
                   Request Status
@@ -54,16 +88,43 @@ class ManageRequests extends Component {
         <div className="scroll-req">
           <table className="mt3">
             <thead>
-              <tr>
-                <th>Id</th>
+              <tr className="o-85">
+                <th>Request Id</th>
                 <th>Quarantine Center</th>
                 <th>Request Descreption</th>
                 <th>Request Status</th>
+                <th>User Name/(Id) (User who responded) </th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody>
-              <Request user={user} />
+              {this.state.requests.map((request) => {
+                if (user.user_role_name === "Center Manager") {
+                  if (this.state.center_id === request.center_id) {
+                    return (
+                      <Request
+                        key={request.request_id}
+                        user={user}
+                        onProfileRouteChange={onProfileRouteChange}
+                        request={request}
+                        sendData={sendData}
+                        updatelist={this.updatelist}
+                      />
+                    );
+                  } else return null;
+                } else {
+                  return (
+                    <Request
+                      key={request.request_id}
+                      user={user}
+                      onProfileRouteChange={onProfileRouteChange}
+                      request={request}
+                      sendData={sendData}
+                      updatelist={this.updatelist}
+                    />
+                  );
+                }
+              })}
             </tbody>
           </table>
         </div>
