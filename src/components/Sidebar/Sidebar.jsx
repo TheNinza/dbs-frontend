@@ -23,7 +23,7 @@ const Sidebar = ({ user, onProfileRouteChange }) => {
           </div>
         </div>
         <div className="actions fw4 mt4">
-          {user.role !== "Center Manager" ? (
+          {user.user_role_name !== "Center Manager" ? (
             <div
               onClick={() => {
                 onProfileRouteChange("manageCenters");
@@ -60,7 +60,7 @@ const Sidebar = ({ user, onProfileRouteChange }) => {
           >
             <code>Manage Requested Services</code>
           </div>
-          {user.role === "Database Administrator" ? (
+          {user.user_role_name === "Database Administrator" ? (
             <div
               onClick={() => {
                 onProfileRouteChange("manageUsers");

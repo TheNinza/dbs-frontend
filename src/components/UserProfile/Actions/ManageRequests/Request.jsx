@@ -17,7 +17,7 @@ class center extends Component {
 
           <td>
             <div className="flex justify-center items-center">
-              {user.role !== "Center Manager" ? (
+              {user.user_role_name !== "Center Manager" ? (
                 <input
                   type="submit"
                   value="Process"
@@ -27,7 +27,7 @@ class center extends Component {
                 ""
               )}
 
-              {user.role !== "Government Official" ? (
+              {user.user_role_name !== "Government Official" ? (
                 <input
                   type="submit"
                   value="Delete"
@@ -37,7 +37,7 @@ class center extends Component {
                 ""
               )}
 
-              {user.role !== "Center Manager" ? (
+              {user.user_role_name !== "Center Manager" ? (
                 <input
                   type="submit"
                   value="Discard"
