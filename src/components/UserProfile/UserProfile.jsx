@@ -20,13 +20,16 @@ import EditPatient from "./Actions/ManagePatients/EditPatient";
 import EditStaff from "./Actions/ManageStaffs/EditStaff";
 import EditUser from "./Actions/ManageUsers/EditUser";
 
-const initialstate = {};
-
 class UserProfile extends Component {
   constructor(props) {
     super(props);
-    this.state = initialstate;
+    this.state = {};
   }
+
+  sendData = (data) => {
+    this.setState({ data: data });
+  };
+
   render() {
     const { user, profileRoute, onProfileRouteChange } = this.props;
     return (
@@ -44,6 +47,7 @@ class UserProfile extends Component {
             />
           ) : profileRoute === "manageCenters" ? (
             <ManageCenters
+              sendData={this.sendData}
               user={user}
               onProfileRouteChange={onProfileRouteChange}
             />
@@ -78,7 +82,7 @@ class UserProfile extends Component {
           ) : profileRoute === "newUser" ? (
             <NewUser />
           ) : profileRoute === "editCenter" ? (
-            <EditCenter />
+            <EditCenter data={this.state.data} />
           ) : profileRoute === "editPatient" ? (
             <EditPatient />
           ) : profileRoute === "editStaff" ? (

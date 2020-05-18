@@ -5,28 +5,53 @@ class center extends Component {
     this.state = {};
   }
 
+  onbuttonedit = () => {
+    this.props.sendData(this.props.center.center_id);
+    this.props.onProfileRouteChange("editCenter");
+  };
+
+  onbuttondelete = () => {
+    fetch("http://localhost:3000/deleteCenter", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        center_id: this.props.center.center_id,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data === 1 || data === "1") {
+          window.alert("center deleted");
+          this.props.updatelist();
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+
   render() {
-    const { onProfileRouteChange } = this.props;
+    const { center } = this.props;
     return (
       <React.Fragment>
         <tr>
-          <td>1</td>
-          <td>Hospital A</td>
-          <td>Address Assflkhasdoffhweoifhosdifhsoidfnospd</td>
-          <td>9876543210</td>
-          <td>123</td>
-          <td>87</td>
+          <td>{`${center.center_id}`}</td>
+          <td>{`${center.center_name}`}</td>
+          <td>{`${center.center_type_description}`}</td>
+          <td> {`${center.user_name}`} </td>
+          <td> {`${center.user_id}`} </td>
+          <td> {`${center.center_address}`} </td>
+          <td> {`${center.center_contact_number}`} </td>
+          <td> {`${center.number_staffs}`} </td>
+          <td> {`${center.number_patients}`} </td>
           <td>
             <div className="flex justify-center items-center">
               <input
-                onClick={() => {
-                  onProfileRouteChange("editCenter");
-                }}
+                onClick={this.onbuttonedit}
                 type="submit"
                 value="Edit"
                 className="grow mh2 pointer shadow-5 b ba b--black bg-transparent f6"
               />
               <input
+                onClick={this.onbuttondelete}
                 type="submit"
                 value="Delete"
                 className="grow mh2 pointer shadow-5 b bg-transparent f6 red ba b--red"

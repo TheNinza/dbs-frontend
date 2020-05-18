@@ -4,11 +4,35 @@ import Center from "./center";
 class ManageCenters extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      centers: [],
+    };
+  }
+
+  updatelist = () => {
+    fetch("http://localhost:3000/center")
+      .then((response) => response.json())
+      .then((centers) => {
+        this.setState({ centers });
+      })
+      .catch((err) => console.log(err));
+    this.setState({ deleted: false });
+    console.log("ok did mount");
+  };
+
+  componentDidMount() {
+    fetch("http://localhost:3000/center")
+      .then((response) => response.json())
+      .then((centers) => {
+        this.setState({ centers });
+      })
+      .catch((err) => console.log(err));
+    this.setState({ deleted: false });
+    console.log("ok did mount");
   }
 
   render() {
-    const { user, onProfileRouteChange } = this.props;
+    const { user, onProfileRouteChange, sendData } = this.props;
     return (
       <div>
         {user.role !== "Center Manager" ? (
@@ -32,15 +56,29 @@ class ManageCenters extends Component {
               <tr>
                 <th>Id</th>
                 <th>Name</th>
+                <th>Center Type</th>
+                <th>Center Manager</th>
+                <th>Center Manager Id</th>
                 <th>Address</th>
-                <th>Phone</th>
-                <th>Total Beds</th>
+                <th>Contact Number</th>
+                <th>Staffs</th>
                 <th>Patients</th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody>
-              <Center user={user} onProfileRouteChange={onProfileRouteChange} />
+              {this.state.centers.map((center) => {
+                return (
+                  <Center
+                    key={center.center_id}
+                    user={user}
+                    onProfileRouteChange={onProfileRouteChange}
+                    center={center}
+                    sendData={sendData}
+                    updatelist={this.updatelist}
+                  />
+                );
+              })}
             </tbody>
           </table>
         </div>
