@@ -7,6 +7,7 @@ class LoginAs extends Component {
       user: {},
       user_role_name: "Government Official",
       password: "",
+      invalidLogin: false,
     };
   }
 
@@ -39,8 +40,10 @@ class LoginAs extends Component {
     })
       .then((response) => response.json())
       .then((data) => {
-        this.props.loadUser(data);
-        this.props.onRouteChange("userProfile");
+        if (data.user_id) {
+          this.props.loadUser(data);
+          this.props.onRouteChange("userProfile");
+        } else this.setState({ invalidLogin: true });
       })
       .catch((err) => console.log(err));
   };
@@ -87,6 +90,11 @@ class LoginAs extends Component {
             />
           </div>
         </div>
+        {this.state.invalidLogin ? (
+          <code className="red mt3">Invalid Password</code>
+        ) : (
+          ""
+        )}
         <div className="ba mt3 mh2 br3 pa2">
           <div className="tc f4 underline">
             <label>Role:</label>
