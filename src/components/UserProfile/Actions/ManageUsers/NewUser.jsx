@@ -1,7 +1,58 @@
 import React, { Component } from "react";
 
 class NewUser extends Component {
-  state = {};
+  state = {
+    role: [],
+    user_name: "",
+    user_email: "",
+    user_phone: "",
+    user_role_id: "",
+  };
+
+  onbuttonsubmit = () => {
+    fetch("http://localhost:3000/newUser", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        user_name: this.state.user_name,
+        user_email: this.state.user_email,
+        user_phone: this.state.user_phone,
+        user_role_id: this.state.user_role_id,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.user_id) {
+          window.alert("user created");
+        }
+      })
+      .catch((err) => console.log("error", err));
+  };
+
+  componentDidMount() {
+    fetch("http://localhost:3000/userrole")
+      .then((response) => response.json())
+      .then((data) => {
+        if (data[0].user_role_id) {
+          this.setState({ role: data });
+        }
+      })
+      .catch((err) => console.log(err));
+  }
+
+  onNameChange = (event) => {
+    this.setState({ user_name: event.target.value });
+  };
+  onuser_emailChange = (event) => {
+    this.setState({ user_email: event.target.value });
+  };
+  oncontact_numberChange = (event) => {
+    this.setState({ user_phone: event.target.value });
+  };
+  onuser_Role_idChange = (event) => {
+    this.setState({ user_role_id: event.target.value });
+  };
+
   render() {
     return (
       <div className="register-form br3 flex flex-column items-center center shadow-3 mt3">
@@ -14,6 +65,7 @@ class NewUser extends Component {
                   Name
                 </label>
                 <input
+                  onChange={this.onNameChange}
                   className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
                   type="text"
                   name="name"
@@ -25,6 +77,7 @@ class NewUser extends Component {
                   Email
                 </label>
                 <input
+                  onChange={this.onuser_emailChange}
                   className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
                   type="email"
                   name="email-address"
@@ -35,7 +88,17 @@ class NewUser extends Component {
                 <label className="db fw6 lh-copy f6" htmlFor="Role">
                   Role
                 </label>
+                <div className="flex">
+                  {this.state.role.map((type) => {
+                    return (
+                      <div key={type.user_role_id}>
+                        <code>{`${type.user_role_id} : ${type.user_role_name}`}</code>
+                      </div>
+                    );
+                  })}
+                </div>
                 <input
+                  onChange={this.onuser_Role_idChange}
                   className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
                   type="text"
                   name="Role"
@@ -47,6 +110,7 @@ class NewUser extends Component {
                   Phone
                 </label>
                 <input
+                  onChange={this.oncontact_numberChange}
                   className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
                   type="text"
                   name="Phone"
@@ -56,6 +120,7 @@ class NewUser extends Component {
             </fieldset>
             <div className="">
               <input
+                onClick={this.onbuttonsubmit}
                 className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
                 type="submit"
                 value="Submit"

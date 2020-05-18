@@ -4,28 +4,49 @@ class User extends Component {
     super(props);
     this.state = {};
   }
+  onbuttonedit = () => {
+    this.props.sendData(this.props.user.user_id);
+    this.props.onProfileRouteChange("editUser");
+  };
+
+  onbuttondelete = () => {
+    fetch("http://localhost:3000/deleteUser", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        user_id: this.props.user.user_id,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data === 1 || data === "1") {
+          window.alert("user deleted");
+          this.props.updatelist();
+        }
+      })
+      .catch((err) => console.log(err));
+  };
 
   render() {
-    const { onProfileRouteChange } = this.props;
+    const { user } = this.props;
     return (
       <React.Fragment>
-        <tr>
-          <td>1</td>
-          <td>User</td>
-          <td>user@example.com</td>
-          <td>9876543210</td>
-          <td>Admin</td>
+        <tr className="o-85">
+          <td> {`${user.user_id}`} </td>
+          <td>{`${user.user_name}`}</td>
+          <td>{`${user.user_email}`}</td>
+          <td>{`${user.user_phone}`}</td>
+          <td>{`${user.user_role_name}`}</td>
           <td>
             <div className="flex justify-center items-center">
               <input
-                onClick={() => {
-                  onProfileRouteChange("editCenter");
-                }}
+                onClick={this.onbuttonedit}
                 type="submit"
                 value="Edit"
                 className="grow mh2 pointer shadow-5 b ba b--black bg-transparent f6"
               />
               <input
+                onClick={this.onbuttondelete}
                 type="submit"
                 value="Delete"
                 className="grow mh2 pointer shadow-5 b bg-transparent f6 red ba b--red"

@@ -4,15 +4,40 @@ import User from "./User";
 class ManageUsers extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      users: [],
+    };
+  }
+
+  updatelist = () => {
+    fetch("http://localhost:3000/user")
+      .then((response) => response.json())
+      .then((users) => {
+        this.setState({ users });
+      })
+      .catch((err) => console.log(err));
+  };
+
+  componentDidMount() {
+    fetch("http://localhost:3000/user")
+      .then((response) => response.json())
+      .then((users) => {
+        this.setState({ users: users });
+      })
+      .catch((err) => console.log(err));
   }
 
   render() {
-    const { onProfileRouteChange } = this.props;
+    const { sendData, onProfileRouteChange } = this.props;
     return (
       <div>
         <div className="new-center">
-          <div className="w-10 tc pa2 mt3 br3 grow bg-blue white b pointer shadow-5">
+          <div
+            onClick={() => {
+              onProfileRouteChange("newUser");
+            }}
+            className="w-10 tc pa2 mt3 br3 grow bg-blue white b pointer shadow-5"
+          >
             Add New User
           </div>
         </div>
@@ -29,7 +54,17 @@ class ManageUsers extends Component {
               </tr>
             </thead>
             <tbody>
-              <User onProfileRouteChange={onProfileRouteChange} />
+              {this.state.users.map((user) => {
+                return (
+                  <User
+                    key={user.user_id}
+                    sendData={sendData}
+                    user={user}
+                    onProfileRouteChange={onProfileRouteChange}
+                    updatelist={this.updatelist}
+                  />
+                );
+              })}
             </tbody>
           </table>
         </div>
