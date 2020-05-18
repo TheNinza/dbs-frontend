@@ -16,8 +16,6 @@ class ManageCenters extends Component {
         this.setState({ centers });
       })
       .catch((err) => console.log(err));
-    this.setState({ deleted: false });
-    console.log("ok did mount");
   };
 
   componentDidMount() {
@@ -28,7 +26,6 @@ class ManageCenters extends Component {
       })
       .catch((err) => console.log(err));
     this.setState({ deleted: false });
-    console.log("ok did mount");
   }
 
   render() {

@@ -59,7 +59,7 @@ th {
   padding: 8px;
 }
 
-tr {
+td {
   opacity: 0.85;
 }
 
@@ -70,5 +70,9 @@ th {
   position: sticky;
   top: 0;
   background-color: white;
-  z-index: 2;
+  z-index: 4;
+}
+
+.o-85 {
+  opacity: 0.85;
 }

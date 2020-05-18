@@ -5,28 +5,52 @@ class Patient extends Component {
     this.state = {};
   }
 
+  onbuttonedit = () => {
+    this.props.sendData(this.props.patient.patient_id);
+    this.props.onProfileRouteChange("editPatient");
+  };
+
+  onbuttondelete = () => {
+    fetch("http://localhost:3000/deletePatient", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        patient_id: this.props.patient.patient_id,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data === 1 || data === "1") {
+          window.alert("patient deleted");
+          this.props.updatelist();
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+
   render() {
-    const { onProfileRouteChange } = this.props;
+    const { patient } = this.props;
     return (
       <React.Fragment>
-        <tr>
-          <td>1</td>
-          <td>Hospital A</td>
-          <td>Address Assflkhasdoffhweoifhosdifhsoidfnospd</td>
-          <td>9876543210</td>
-          <td>123</td>
-          <td>87</td>
+        <tr className="o-85">
+          <td>{`${patient.patient_id}`}</td>
+          <td>{`${patient.patient_name}`}</td>
+          <td>{`${patient.patient_address}`}</td>
+          <td>{`${patient.center_name}`}</td>
+          <td>{`${patient.date_of_admission}`}</td>
+          <td>{`${patient.stay_duration}`}</td>
+          <td>{`${patient.patient_status}`}</td>
+
           <td>
             <div className="flex justify-center items-center">
               <input
-                onClick={() => {
-                  onProfileRouteChange("editCenter");
-                }}
+                onClick={this.onbuttonedit}
                 type="submit"
                 value="Edit"
                 className="grow mh2 pointer shadow-5 b ba b--black bg-transparent f6"
               />
               <input
+                onClick={this.onbuttondelete}
                 type="submit"
                 value="Delete"
                 className="grow mh2 pointer shadow-5 b bg-transparent f6 red ba b--red"

@@ -68,6 +68,7 @@ class UserProfile extends Component {
             />
           ) : profileRoute === "managePatients" ? (
             <ManagePatients
+              sendData={this.sendData}
               user={user}
               onProfileRouteChange={onProfileRouteChange}
             />
@@ -84,7 +85,7 @@ class UserProfile extends Component {
           ) : profileRoute === "editCenter" ? (
             <EditCenter data={this.state.data} />
           ) : profileRoute === "editPatient" ? (
-            <EditPatient />
+            <EditPatient data={this.state.data} />
           ) : profileRoute === "editStaff" ? (
             <EditStaff />
           ) : profileRoute === "editUser" ? (

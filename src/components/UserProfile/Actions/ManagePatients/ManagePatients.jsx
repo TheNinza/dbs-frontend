@@ -4,11 +4,31 @@ import Patient from "./Patient";
 class ManagePatients extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      patients: [],
+    };
+  }
+
+  updatelist = () => {
+    fetch("http://localhost:3000/patient")
+      .then((response) => response.json())
+      .then((patients) => {
+        this.setState({ patients });
+      })
+      .catch((err) => console.log(err));
+  };
+
+  componentDidMount() {
+    fetch("http://localhost:3000/patient")
+      .then((response) => response.json())
+      .then((patients) => {
+        this.setState({ patients: patients });
+      })
+      .catch((err) => console.log(err));
   }
 
   render() {
-    const { user, onProfileRouteChange } = this.props;
+    const { user, sendData, onProfileRouteChange } = this.props;
     return (
       <div>
         <div className="new-Patient">
@@ -29,17 +49,26 @@ class ManagePatients extends Component {
                 <th>Id</th>
                 <th>Name</th>
                 <th>Address</th>
-                <th>Phone</th>
-                <th>Total Beds</th>
-                <th>Patients</th>
+                <th>Quarantine Center</th>
+                <th>Date of Admission</th>
+                <th>Stay Duration</th>
+                <th>Status</th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody>
-              <Patient
-                user={user}
-                onProfileRouteChange={onProfileRouteChange}
-              />
+              {this.state.patients.map((patient) => {
+                return (
+                  <Patient
+                    key={patient.patient_id}
+                    sendData={sendData}
+                    user={user}
+                    onProfileRouteChange={onProfileRouteChange}
+                    patient={patient}
+                    updatelist={this.updatelist}
+                  />
+                );
+              })}
             </tbody>
           </table>
         </div>
