@@ -29,7 +29,7 @@ class Staff extends Component {
   };
 
   render() {
-    const { staff } = this.props;
+    const { staff, profileRoute } = this.props;
     return (
       <React.Fragment>
         <tr className="o-85">
@@ -39,23 +39,26 @@ class Staff extends Component {
           <td>{`${staff.center_name}`}</td>
           <td>{`${staff.role_name}`}</td>
           <td>{`${staff.working_hours}`}</td>
-
-          <td>
-            <div className="flex justify-center items-center">
-              <input
-                onClick={this.onbuttonedit}
-                type="submit"
-                value="Edit"
-                className="grow mh2 pointer shadow-5 b ba b--black bg-transparent f6"
-              />
-              <input
-                onClick={this.onbuttondelete}
-                type="submit"
-                value="Delete"
-                className="grow mh2 pointer shadow-5 b bg-transparent f6 red ba b--red"
-              />
-            </div>
-          </td>
+          {profileRoute !== "centerStaffs" ? (
+            <td>
+              <div className="flex justify-center items-center">
+                <input
+                  onClick={this.onbuttonedit}
+                  type="submit"
+                  value="Edit"
+                  className="grow mh2 pointer shadow-5 b ba b--black bg-transparent f6"
+                />
+                <input
+                  onClick={this.onbuttondelete}
+                  type="submit"
+                  value="Delete"
+                  className="grow mh2 pointer shadow-5 b bg-transparent f6 red ba b--red"
+                />
+              </div>
+            </td>
+          ) : (
+            <React.Fragment></React.Fragment>
+          )}
         </tr>
       </React.Fragment>
     );

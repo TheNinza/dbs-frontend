@@ -28,11 +28,21 @@ class center extends Component {
       .catch((err) => console.log(err));
   };
 
+  onbuttonshowstaff = () => {
+    this.props.sendData(this.props.center.center_id);
+    this.props.onProfileRouteChange("centerStaffs");
+  };
+
+  onbuttonshowpatient = () => {
+    this.props.sendData(this.props.center.center_id);
+    this.props.onProfileRouteChange("centerPatients");
+  };
+
   render() {
     const { center } = this.props;
     return (
       <React.Fragment>
-        <tr>
+        <tr className="o-85">
           <td>{`${center.center_id}`}</td>
           <td>{`${center.center_name}`}</td>
           <td>{`${center.center_type_description}`}</td>
@@ -56,11 +66,20 @@ class center extends Component {
                 value="Delete"
                 className="grow mh2 pointer shadow-5 b bg-transparent f6 red ba b--red"
               />
-              <input
-                type="submit"
-                value="Show Staffs"
-                className="grow mh2 pointer shadow-5 b bg-transparent f6 blue ba b--blue"
-              />
+              <div className="flex flex-column">
+                <input
+                  onClick={this.onbuttonshowstaff}
+                  type="submit"
+                  value="Show Staffs"
+                  className="grow mh2 mv1 pointer shadow-5 b bg-transparent f6 blue ba b--blue"
+                />
+                <input
+                  onClick={this.onbuttonshowpatient}
+                  type="submit"
+                  value="Show Patients"
+                  className="grow mh2 pointer shadow-5 b bg-transparent f6 blue ba b--blue"
+                />
+              </div>
             </div>
           </td>
         </tr>

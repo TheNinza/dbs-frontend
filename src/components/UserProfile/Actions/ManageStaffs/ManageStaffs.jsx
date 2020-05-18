@@ -22,16 +22,21 @@ class ManageStaffs extends Component {
     fetch("http://localhost:3000/staff")
       .then((response) => response.json())
       .then((staffs) => {
-        this.setState({ staffs: staffs });
+        if (this.props.profileRoute === "centerStaffs") {
+          const temp = staffs.filter(
+            (staff) => staff.center_id === this.props.data
+          );
+          this.setState({ staffs: temp });
+        } else this.setState({ staffs: staffs });
       })
       .catch((err) => console.log(err));
   }
 
   render() {
-    const { user, sendData, onProfileRouteChange } = this.props;
+    const { user, sendData, onProfileRouteChange, profileRoute } = this.props;
     return (
       <div>
-        {user.role !== "Center Manager" ? (
+        {user.role !== "Center Manager" && profileRoute !== "centerStaffs" ? (
           <div className="newstaff">
             <div
               onClick={() => {
@@ -56,7 +61,11 @@ class ManageStaffs extends Component {
                 <th>Quarantine Center</th>
                 <th>Role</th>
                 <th>Working-Hours</th>
-                <th>Actions</th>
+                {profileRoute !== "centerStaffs" ? (
+                  <th>Actions</th>
+                ) : (
+                  <React.Fragment></React.Fragment>
+                )}
               </tr>
             </thead>
             <tbody>
@@ -69,6 +78,7 @@ class ManageStaffs extends Component {
                     onProfileRouteChange={onProfileRouteChange}
                     staff={staff}
                     updatelist={this.updatelist}
+                    profileRoute={profileRoute}
                   />
                 );
               })}

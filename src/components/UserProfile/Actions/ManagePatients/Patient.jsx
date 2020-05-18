@@ -29,7 +29,7 @@ class Patient extends Component {
   };
 
   render() {
-    const { patient } = this.props;
+    const { patient, profileRoute } = this.props;
     return (
       <React.Fragment>
         <tr className="o-85">
@@ -40,23 +40,26 @@ class Patient extends Component {
           <td>{`${patient.date_of_admission}`}</td>
           <td>{`${patient.stay_duration}`}</td>
           <td>{`${patient.patient_status}`}</td>
-
-          <td>
-            <div className="flex justify-center items-center">
-              <input
-                onClick={this.onbuttonedit}
-                type="submit"
-                value="Edit"
-                className="grow mh2 pointer shadow-5 b ba b--black bg-transparent f6"
-              />
-              <input
-                onClick={this.onbuttondelete}
-                type="submit"
-                value="Delete"
-                className="grow mh2 pointer shadow-5 b bg-transparent f6 red ba b--red"
-              />
-            </div>
-          </td>
+          {profileRoute !== "centerPatients" ? (
+            <td>
+              <div className="flex justify-center items-center">
+                <input
+                  onClick={this.onbuttonedit}
+                  type="submit"
+                  value="Edit"
+                  className="grow mh2 pointer shadow-5 b ba b--black bg-transparent f6"
+                />
+                <input
+                  onClick={this.onbuttondelete}
+                  type="submit"
+                  value="Delete"
+                  className="grow mh2 pointer shadow-5 b bg-transparent f6 red ba b--red"
+                />
+              </div>
+            </td>
+          ) : (
+            <React.Fragment></React.Fragment>
+          )}
         </tr>
       </React.Fragment>
     );

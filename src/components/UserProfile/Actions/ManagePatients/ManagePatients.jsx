@@ -22,25 +22,34 @@ class ManagePatients extends Component {
     fetch("http://localhost:3000/patient")
       .then((response) => response.json())
       .then((patients) => {
-        this.setState({ patients: patients });
+        if (this.props.profileRoute === "centerPatients") {
+          const temp = patients.filter(
+            (patient) => patient.center_id === this.props.data
+          );
+          this.setState({ patients: temp });
+        } else this.setState({ patients: patients });
       })
       .catch((err) => console.log(err));
   }
 
   render() {
-    const { user, sendData, onProfileRouteChange } = this.props;
+    const { user, sendData, onProfileRouteChange, profileRoute } = this.props;
     return (
       <div>
-        <div className="new-Patient">
-          <div
-            onClick={() => {
-              onProfileRouteChange("newPatient");
-            }}
-            className="w-10 tc pa2 mt3 br3 grow bg-blue white b pointer shadow-5"
-          >
-            Add New Patient
+        {profileRoute !== "centerPatients" ? (
+          <div className="new-Patient">
+            <div
+              onClick={() => {
+                onProfileRouteChange("newPatient");
+              }}
+              className="w-10 tc pa2 mt3 br3 grow bg-blue white b pointer shadow-5"
+            >
+              Add New Patient
+            </div>
           </div>
-        </div>
+        ) : (
+          <React.Fragment></React.Fragment>
+        )}
 
         <div className="scroll">
           <table className="mt3">
@@ -53,7 +62,11 @@ class ManagePatients extends Component {
                 <th>Date of Admission</th>
                 <th>Stay Duration</th>
                 <th>Status</th>
-                <th>Actions</th>
+                {profileRoute !== "centerPatients" ? (
+                  <th>Actions</th>
+                ) : (
+                  <React.Fragment></React.Fragment>
+                )}
               </tr>
             </thead>
             <tbody>
@@ -66,6 +79,7 @@ class ManagePatients extends Component {
                     onProfileRouteChange={onProfileRouteChange}
                     patient={patient}
                     updatelist={this.updatelist}
+                    profileRoute={profileRoute}
                   />
                 );
               })}
