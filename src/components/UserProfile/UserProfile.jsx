@@ -53,16 +53,19 @@ class UserProfile extends Component {
             />
           ) : profileRoute === "manageStaffs" ? (
             <ManageStaffs
+              sendData={this.sendData}
               user={user}
               onProfileRouteChange={onProfileRouteChange}
             />
           ) : profileRoute === "manageUsers" ? (
             <ManageUsers
+              sendData={this.sendData}
               user={user}
               onProfileRouteChange={onProfileRouteChange}
             />
           ) : profileRoute === "manageRequests" ? (
             <ManageRequests
+              sendData={this.sendData}
               user={user}
               onProfileRouteChange={onProfileRouteChange}
             />
@@ -87,9 +90,9 @@ class UserProfile extends Component {
           ) : profileRoute === "editPatient" ? (
             <EditPatient data={this.state.data} />
           ) : profileRoute === "editStaff" ? (
-            <EditStaff />
+            <EditStaff data={this.state.data} />
           ) : profileRoute === "editUser" ? (
-            <EditUser />
+            <EditUser data={this.state.data} />
           ) : (
             ""
           )}
