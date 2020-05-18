@@ -17,6 +17,7 @@ nav {
 
 .sidebar {
   height: 89vh;
+  position: relative;
 }
 
 /* .center {

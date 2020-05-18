@@ -5,29 +5,51 @@ class Staff extends Component {
     super(props);
     this.state = {};
   }
+  onbuttonedit = () => {
+    this.props.sendData(this.props.staff.staff_id);
+    this.props.onProfileRouteChange("editStaff");
+  };
+
+  onbuttondelete = () => {
+    fetch("http://localhost:3000/deleteStaff", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        staff_id: this.props.staff.staff_id,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data === 1 || data === "1") {
+          window.alert("staff deleted");
+          this.props.updatelist();
+        }
+      })
+      .catch((err) => console.log(err));
+  };
 
   render() {
-    const { onProfileRouteChange } = this.props;
+    const { staff } = this.props;
     return (
       <React.Fragment>
-        <tr>
-          <td>1</td>
-          <td>Staff A</td>
-          <td>Sweeper</td>
-          <td>9876543210</td>
-          <td>Address asfadhfopweiehoshfpsoifha</td>
-          <td>900-1500</td>
+        <tr className="o-85">
+          <td>{`${staff.staff_id}`}</td>
+          <td>{`${staff.staff_name}`}</td>
+          <td>{`${staff.staff_contact_number}`}</td>
+          <td>{`${staff.center_name}`}</td>
+          <td>{`${staff.role_name}`}</td>
+          <td>{`${staff.working_hours}`}</td>
+
           <td>
             <div className="flex justify-center items-center">
               <input
-                onClick={() => {
-                  onProfileRouteChange("editCenter");
-                }}
+                onClick={this.onbuttonedit}
                 type="submit"
                 value="Edit"
                 className="grow mh2 pointer shadow-5 b ba b--black bg-transparent f6"
               />
               <input
+                onClick={this.onbuttondelete}
                 type="submit"
                 value="Delete"
                 className="grow mh2 pointer shadow-5 b bg-transparent f6 red ba b--red"
