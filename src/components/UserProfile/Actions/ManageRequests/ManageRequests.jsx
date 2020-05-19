@@ -74,7 +74,7 @@ class ManageRequests extends Component {
     return (
       <div>
         <div className="new-request">
-          {user.role !== "Government Official" ? (
+          {user.user_role_name !== "Government Official" ? (
             <div
               onClick={() => {
                 onProfileRouteChange("newRequest");
@@ -87,7 +87,7 @@ class ManageRequests extends Component {
             <React.Fragment></React.Fragment>
           )}
         </div>
-        {user.role !== "Center Manager" ? (
+        {/* {user.role !== "Center Manager" ? (
           <div className="mt2">
             <label htmlFor="filters" className="mt3 f3 fw-3">
               Filters:
@@ -108,7 +108,7 @@ class ManageRequests extends Component {
           </div>
         ) : (
           ""
-        )}
+        )} */}
 
         <div className="scroll-req">
           <table className="mt3">
