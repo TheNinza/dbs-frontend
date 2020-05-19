@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import Nav from "../components/Nav/Nav";
+import About from "../components/About/About";
 import Home from "./home";
 import UserProfile from "../components/UserProfile/UserProfile";
 import Particles from "react-particles-js";
@@ -55,6 +56,8 @@ class App extends Component {
 
         {route === "home" ? (
           <Home onRouteChange={this.onRouteChange} loadUser={this.loadUser} />
+        ) : route === "about" ? (
+          <About />
         ) : (
           <UserProfile
             user={user}

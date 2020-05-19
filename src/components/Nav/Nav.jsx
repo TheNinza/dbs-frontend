@@ -13,8 +13,17 @@ const Nav = ({ isSignedIn, onRouteChange }) => {
         >
           {isSignedIn ? "Log Out" : ""}
         </div>
-        <div className="grow link dim light-gray f6 f5-ns dib mr3 mr4-ns pointer">
-          About
+        <div
+          onClick={() => onRouteChange("about")}
+          className="grow link dim light-gray f6 f5-ns dib mr3 mr4-ns pointer"
+        >
+          {!isSignedIn ? "About" : ""}
+        </div>
+        <div
+          onClick={() => onRouteChange("home")}
+          className="grow link dim light-gray f6 f5-ns dib mr3 mr4-ns pointer"
+        >
+          {!isSignedIn ? "Home" : ""}
         </div>
         {/* <div className="grow link dim light-gray f6 f5-ns dib mr3 mr4-ns pointer">
           Quarantine Centers
