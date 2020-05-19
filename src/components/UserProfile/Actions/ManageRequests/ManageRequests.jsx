@@ -87,28 +87,6 @@ class ManageRequests extends Component {
             <React.Fragment></React.Fragment>
           )}
         </div>
-        {/* {user.role !== "Center Manager" ? (
-          <div className="mt2">
-            <label htmlFor="filters" className="mt3 f3 fw-3">
-              Filters:
-            </label>
-            <div className="flex">
-              <div className="ba pa2">
-                <label htmlFor="request-status" className="mh2">
-                  Request Status
-                </label>
-                <select onClick={this.onfilter} id="status" name="status">
-                  <option value="All">All</option>
-                  <option value="Unsolved">Unsolved</option>
-                  <option value="Processed">Processed</option>
-                  <option value="Discarded">Discarded</option>
-                </select>
-              </div>
-            </div>
-          </div>
-        ) : (
-          ""
-        )} */}
 
         <div className="scroll-req">
           <table className="mt3">
