@@ -26,7 +26,7 @@ class EditProfile extends Component {
   };
 
   onButtonSubmit = () => {
-    fetch("http://localhost:3000/editProfile", {
+    fetch("https://enigmatic-journey-77724.herokuapp.com/editProfile", {
       method: "put",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

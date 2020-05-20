@@ -11,7 +11,7 @@ class NewCenter extends Component {
   };
 
   onbuttonsubmit = () => {
-    fetch("http://localhost:3000/newCenter", {
+    fetch("https://enigmatic-journey-77724.herokuapp.com/newCenter", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -32,7 +32,7 @@ class NewCenter extends Component {
   };
 
   componentDidMount() {
-    fetch("http://localhost:3000/centerType")
+    fetch("https://enigmatic-journey-77724.herokuapp.com/centerType")
       .then((response) => response.json())
       .then((data) => {
         if (data[0].center_type_id) {

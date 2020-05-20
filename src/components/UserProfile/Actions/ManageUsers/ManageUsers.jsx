@@ -10,7 +10,7 @@ class ManageUsers extends Component {
   }
 
   updatelist = () => {
-    fetch("http://localhost:3000/user")
+    fetch("https://enigmatic-journey-77724.herokuapp.com/user")
       .then((response) => response.json())
       .then((users) => {
         this.setState({ users });
@@ -19,7 +19,7 @@ class ManageUsers extends Component {
   };
 
   componentDidMount() {
-    fetch("http://localhost:3000/user")
+    fetch("https://enigmatic-journey-77724.herokuapp.com/user")
       .then((response) => response.json())
       .then((users) => {
         this.setState({ users: users });
@@ -41,33 +41,37 @@ class ManageUsers extends Component {
             Add New User
           </div>
         </div>
-        <div className="scroll">
-          <table className="mt3">
-            <thead>
-              <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Role</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {this.state.users.map((user) => {
-                return (
-                  <User
-                    key={user.user_id}
-                    sendData={sendData}
-                    user={user}
-                    onProfileRouteChange={onProfileRouteChange}
-                    updatelist={this.updatelist}
-                  />
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
+        {this.state.users.length === 0 ? (
+          <div className="f3 mt3 fw6 pa2 o-50">Loading...</div>
+        ) : (
+          <div className="scroll">
+            <table className="mt3">
+              <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th>Role</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.state.users.map((user) => {
+                  return (
+                    <User
+                      key={user.user_id}
+                      sendData={sendData}
+                      user={user}
+                      onProfileRouteChange={onProfileRouteChange}
+                      updatelist={this.updatelist}
+                    />
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
     );
   }

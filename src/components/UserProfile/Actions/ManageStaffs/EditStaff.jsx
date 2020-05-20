@@ -12,7 +12,7 @@ class EditStaff extends Component {
   };
 
   onbuttonsubmit = () => {
-    fetch("http://localhost:3000/editStaff", {
+    fetch("https://enigmatic-journey-77724.herokuapp.com/editStaff", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -34,7 +34,7 @@ class EditStaff extends Component {
   };
 
   componentDidMount() {
-    fetch("http://localhost:3000/staffrole")
+    fetch("https://enigmatic-journey-77724.herokuapp.com/staffrole")
       .then((response) => response.json())
       .then((data) => {
         if (data[0].role_id) {

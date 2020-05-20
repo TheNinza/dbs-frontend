@@ -11,7 +11,7 @@ class ManageStaffs extends Component {
   }
 
   setCenterId = () => {
-    fetch("http://localhost:3000/getcenteruser", {
+    fetch("https://enigmatic-journey-77724.herokuapp.com/getcenteruser", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -26,7 +26,7 @@ class ManageStaffs extends Component {
   };
 
   updatelist = () => {
-    fetch("http://localhost:3000/staff")
+    fetch("https://enigmatic-journey-77724.herokuapp.com/staff")
       .then((response) => response.json())
       .then((staffs) => {
         this.setState({ staffs });
@@ -36,7 +36,7 @@ class ManageStaffs extends Component {
 
   componentDidMount() {
     this.setCenterId();
-    fetch("http://localhost:3000/staff")
+    fetch("https://enigmatic-journey-77724.herokuapp.com/staff")
       .then((response) => response.json())
       .then((staffs) => {
         if (this.props.profileRoute === "centerStaffs") {
@@ -67,28 +67,43 @@ class ManageStaffs extends Component {
         ) : (
           <React.Fragment></React.Fragment>
         )}
-
-        <div className="scroll">
-          <table className="mt3">
-            <thead>
-              <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Contact Number</th>
-                <th>Quarantine Center</th>
-                <th>Role</th>
-                <th>Working-Hours</th>
-                {profileRoute !== "centerStaffs" ? (
-                  <th>Actions</th>
-                ) : (
-                  <React.Fragment></React.Fragment>
-                )}
-              </tr>
-            </thead>
-            <tbody>
-              {this.state.staffs.map((staff) => {
-                if (user.user_role_name === "Center Manager") {
-                  if (this.state.center_id === staff.center_id) {
+        {this.state.staffs.length === 0 ? (
+          <div className="f3 mt3 fw6 pa2 o-50">Loading...</div>
+        ) : (
+          <div className="scroll">
+            <table className="mt3">
+              <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>Name</th>
+                  <th>Contact Number</th>
+                  <th>Quarantine Center</th>
+                  <th>Role</th>
+                  <th>Working-Hours</th>
+                  {profileRoute !== "centerStaffs" ? (
+                    <th>Actions</th>
+                  ) : (
+                    <React.Fragment></React.Fragment>
+                  )}
+                </tr>
+              </thead>
+              <tbody>
+                {this.state.staffs.map((staff) => {
+                  if (user.user_role_name === "Center Manager") {
+                    if (this.state.center_id === staff.center_id) {
+                      return (
+                        <Staff
+                          key={staff.staff_id}
+                          sendData={sendData}
+                          user={user}
+                          onProfileRouteChange={onProfileRouteChange}
+                          staff={staff}
+                          updatelist={this.updatelist}
+                          profileRoute={profileRoute}
+                        />
+                      );
+                    } else return null;
+                  } else {
                     return (
                       <Staff
                         key={staff.staff_id}
@@ -100,24 +115,12 @@ class ManageStaffs extends Component {
                         profileRoute={profileRoute}
                       />
                     );
-                  } else return null;
-                } else {
-                  return (
-                    <Staff
-                      key={staff.staff_id}
-                      sendData={sendData}
-                      user={user}
-                      onProfileRouteChange={onProfileRouteChange}
-                      staff={staff}
-                      updatelist={this.updatelist}
-                      profileRoute={profileRoute}
-                    />
-                  );
-                }
-              })}
-            </tbody>
-          </table>
-        </div>
+                  }
+                })}
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
     );
   }

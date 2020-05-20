@@ -10,7 +10,7 @@ class ManageCenters extends Component {
   }
 
   updatelist = () => {
-    fetch("http://localhost:3000/center")
+    fetch("https://enigmatic-journey-77724.herokuapp.com/center")
       .then((response) => response.json())
       .then((centers) => {
         this.setState({ centers });
@@ -19,7 +19,7 @@ class ManageCenters extends Component {
   };
 
   componentDidMount() {
-    fetch("http://localhost:3000/center")
+    fetch("https://enigmatic-journey-77724.herokuapp.com/center")
       .then((response) => response.json())
       .then((centers) => {
         this.setState({ centers });
@@ -47,38 +47,42 @@ class ManageCenters extends Component {
           <React.Fragment></React.Fragment>
         )}
 
-        <div className="scroll">
-          <table className="mt3">
-            <thead>
-              <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Center Type</th>
-                <th>Center Manager</th>
-                <th>Center Manager Id</th>
-                <th>Address</th>
-                <th>Contact Number</th>
-                <th>Staffs</th>
-                <th>Patients</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {this.state.centers.map((center) => {
-                return (
-                  <Center
-                    key={center.center_id}
-                    user={user}
-                    onProfileRouteChange={onProfileRouteChange}
-                    center={center}
-                    sendData={sendData}
-                    updatelist={this.updatelist}
-                  />
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
+        {this.state.centers.length === 0 ? (
+          <div className="f3 mt3 fw6 pa2 o-50">Loading...</div>
+        ) : (
+          <div className="scroll">
+            <table className="mt3">
+              <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>Name</th>
+                  <th>Center Type</th>
+                  <th>Center Manager</th>
+                  <th>Center Manager Id</th>
+                  <th>Address</th>
+                  <th>Contact Number</th>
+                  <th>Staffs</th>
+                  <th>Patients</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.state.centers.map((center) => {
+                  return (
+                    <Center
+                      key={center.center_id}
+                      user={user}
+                      onProfileRouteChange={onProfileRouteChange}
+                      center={center}
+                      sendData={sendData}
+                      updatelist={this.updatelist}
+                    />
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
     );
   }

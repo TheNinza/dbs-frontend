@@ -10,7 +10,7 @@ class User extends Component {
   };
 
   onbuttondelete = () => {
-    fetch("http://localhost:3000/deleteUser", {
+    fetch("https://enigmatic-journey-77724.herokuapp.com/deleteUser", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

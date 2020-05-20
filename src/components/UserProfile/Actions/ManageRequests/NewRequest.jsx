@@ -7,7 +7,7 @@ class NewService extends Component {
   };
 
   onbuttonsubmit = () => {
-    fetch("http://localhost:3000/newRequest", {
+    fetch("https://enigmatic-journey-77724.herokuapp.com/newRequest", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

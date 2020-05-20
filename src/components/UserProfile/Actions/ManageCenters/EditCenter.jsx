@@ -15,7 +15,7 @@ class EditCenter extends Component {
   }
 
   onbuttonsubmit = () => {
-    fetch("http://localhost:3000/editCenter", {
+    fetch("https://enigmatic-journey-77724.herokuapp.com/editCenter", {
       method: "put",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -37,7 +37,7 @@ class EditCenter extends Component {
   };
 
   componentDidMount() {
-    fetch("http://localhost:3000/centerType")
+    fetch("https://enigmatic-journey-77724.herokuapp.com/centerType")
       .then((response) => response.json())
       .then((data) => {
         if (data[0].center_type_id) {

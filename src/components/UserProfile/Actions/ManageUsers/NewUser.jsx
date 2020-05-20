@@ -10,7 +10,7 @@ class NewUser extends Component {
   };
 
   onbuttonsubmit = () => {
-    fetch("http://localhost:3000/newUser", {
+    fetch("https://enigmatic-journey-77724.herokuapp.com/newUser", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -30,7 +30,7 @@ class NewUser extends Component {
   };
 
   componentDidMount() {
-    fetch("http://localhost:3000/userrole")
+    fetch("https://enigmatic-journey-77724.herokuapp.com/userrole")
       .then((response) => response.json())
       .then((data) => {
         if (data[0].user_role_id) {

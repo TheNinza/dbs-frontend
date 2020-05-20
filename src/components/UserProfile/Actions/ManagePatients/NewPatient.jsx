@@ -11,7 +11,7 @@ class NewPatient extends Component {
   };
 
   onbuttonsubmit = () => {
-    fetch("http://localhost:3000/newPatient", {
+    fetch("https://enigmatic-journey-77724.herokuapp.com/newPatient", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(this.state),

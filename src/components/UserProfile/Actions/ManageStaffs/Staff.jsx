@@ -11,7 +11,7 @@ class Staff extends Component {
   };
 
   onbuttondelete = () => {
-    fetch("http://localhost:3000/deleteStaff", {
+    fetch("https://enigmatic-journey-77724.herokuapp.com/deleteStaff", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

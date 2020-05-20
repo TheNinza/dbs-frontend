@@ -30,7 +30,7 @@ class LoginAs extends Component {
   };
 
   onLogin = () => {
-    fetch("http://localhost:3000/login", {
+    fetch("https://enigmatic-journey-77724.herokuapp.com/login", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

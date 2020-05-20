@@ -11,7 +11,7 @@ class Patient extends Component {
   };
 
   onbuttondelete = () => {
-    fetch("http://localhost:3000/deletePatient", {
+    fetch("https://enigmatic-journey-77724.herokuapp.com/deletePatient", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

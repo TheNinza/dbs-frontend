@@ -5,7 +5,7 @@ class center extends Component {
     this.state = {};
   }
   onbuttondelete = () => {
-    fetch("http://localhost:3000/deleteRequest", {
+    fetch("https://enigmatic-journey-77724.herokuapp.com/deleteRequest", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -23,7 +23,7 @@ class center extends Component {
   };
 
   onbuttonprocess = () => {
-    fetch("http://localhost:3000/requestActions", {
+    fetch("https://enigmatic-journey-77724.herokuapp.com/requestActions", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -43,7 +43,7 @@ class center extends Component {
   };
 
   onbuttondiscard = () => {
-    fetch("http://localhost:3000/requestActions", {
+    fetch("https://enigmatic-journey-77724.herokuapp.com/requestActions", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

@@ -11,7 +11,7 @@ class ManagePatients extends Component {
   }
 
   setCenterId = () => {
-    fetch("http://localhost:3000/getcenteruser", {
+    fetch("https://enigmatic-journey-77724.herokuapp.com/getcenteruser", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -26,7 +26,7 @@ class ManagePatients extends Component {
   };
 
   updatelist = () => {
-    fetch("http://localhost:3000/patient")
+    fetch("https://enigmatic-journey-77724.herokuapp.com/patient")
       .then((response) => response.json())
       .then((patients) => {
         this.setState({ patients });
@@ -36,7 +36,7 @@ class ManagePatients extends Component {
 
   componentDidMount() {
     this.setCenterId();
-    fetch("http://localhost:3000/patient")
+    fetch("https://enigmatic-journey-77724.herokuapp.com/patient")
       .then((response) => response.json())
       .then((patients) => {
         if (this.props.profileRoute === "centerPatients") {
@@ -69,29 +69,44 @@ class ManagePatients extends Component {
         ) : (
           <React.Fragment></React.Fragment>
         )}
-
-        <div className="scroll">
-          <table className="mt3">
-            <thead>
-              <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Address</th>
-                <th>Quarantine Center</th>
-                <th>Date of Admission</th>
-                <th>Stay Duration</th>
-                <th>Status</th>
-                {profileRoute !== "centerPatients" ? (
-                  <th>Actions</th>
-                ) : (
-                  <React.Fragment></React.Fragment>
-                )}
-              </tr>
-            </thead>
-            <tbody>
-              {this.state.patients.map((patient) => {
-                if (user.user_role_name === "Center Manager") {
-                  if (this.state.center_id === patient.center_id) {
+        {this.state.patients.length === 0 ? (
+          <div className="f3 mt3 fw6 pa2 o-50">Loading...</div>
+        ) : (
+          <div className="scroll">
+            <table className="mt3">
+              <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>Name</th>
+                  <th>Address</th>
+                  <th>Quarantine Center</th>
+                  <th>Date of Admission</th>
+                  <th>Stay Duration</th>
+                  <th>Status</th>
+                  {profileRoute !== "centerPatients" ? (
+                    <th>Actions</th>
+                  ) : (
+                    <React.Fragment></React.Fragment>
+                  )}
+                </tr>
+              </thead>
+              <tbody>
+                {this.state.patients.map((patient) => {
+                  if (user.user_role_name === "Center Manager") {
+                    if (this.state.center_id === patient.center_id) {
+                      return (
+                        <Patient
+                          key={patient.patient_id}
+                          sendData={sendData}
+                          user={user}
+                          onProfileRouteChange={onProfileRouteChange}
+                          patient={patient}
+                          updatelist={this.updatelist}
+                          profileRoute={profileRoute}
+                        />
+                      );
+                    } else return null;
+                  } else {
                     return (
                       <Patient
                         key={patient.patient_id}
@@ -103,24 +118,12 @@ class ManagePatients extends Component {
                         profileRoute={profileRoute}
                       />
                     );
-                  } else return null;
-                } else {
-                  return (
-                    <Patient
-                      key={patient.patient_id}
-                      sendData={sendData}
-                      user={user}
-                      onProfileRouteChange={onProfileRouteChange}
-                      patient={patient}
-                      updatelist={this.updatelist}
-                      profileRoute={profileRoute}
-                    />
-                  );
-                }
-              })}
-            </tbody>
-          </table>
-        </div>
+                  }
+                })}
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
     );
   }

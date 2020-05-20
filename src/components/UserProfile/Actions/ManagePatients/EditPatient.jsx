@@ -12,7 +12,7 @@ class EditPatient extends Component {
   };
 
   onbuttonsubmit = () => {
-    fetch("http://localhost:3000/editPatient", {
+    fetch("https://enigmatic-journey-77724.herokuapp.com/editPatient", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(this.state),

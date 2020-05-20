@@ -12,7 +12,7 @@ class ManageRequests extends Component {
   }
 
   setCenterId = () => {
-    fetch("http://localhost:3000/getcenteruser", {
+    fetch("https://enigmatic-journey-77724.herokuapp.com/getcenteruser", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -27,7 +27,7 @@ class ManageRequests extends Component {
   };
 
   updatelist = () => {
-    fetch("http://localhost:3000/request")
+    fetch("https://enigmatic-journey-77724.herokuapp.com/request")
       .then((response) => response.json())
       .then((requests) => {
         this.setState({ requests });
@@ -37,7 +37,7 @@ class ManageRequests extends Component {
 
   componentDidMount() {
     this.setCenterId();
-    fetch("http://localhost:3000/request")
+    fetch("https://enigmatic-journey-77724.herokuapp.com/request")
       .then((response) => response.json())
       .then((requests) => {
         this.setState({ requests });
@@ -87,23 +87,37 @@ class ManageRequests extends Component {
             <React.Fragment></React.Fragment>
           )}
         </div>
-
-        <div className="scroll-req">
-          <table className="mt3">
-            <thead>
-              <tr>
-                <th>Request Id</th>
-                <th>Quarantine Center</th>
-                <th>Request Descreption</th>
-                <th>Request Status</th>
-                <th>User Name/(Id) (User who responded) </th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {this.state.requests.map((request) => {
-                if (user.user_role_name === "Center Manager") {
-                  if (this.state.center_id === request.center_id) {
+        {this.state.requests.length === 0 ? (
+          <div className="f3 mt3 fw6 pa2 o-50">Loading...</div>
+        ) : (
+          <div className="scroll-req">
+            <table className="mt3">
+              <thead>
+                <tr>
+                  <th>Request Id</th>
+                  <th>Quarantine Center</th>
+                  <th>Request Descreption</th>
+                  <th>Request Status</th>
+                  <th>User Name/(Id) (User who responded) </th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.state.requests.map((request) => {
+                  if (user.user_role_name === "Center Manager") {
+                    if (this.state.center_id === request.center_id) {
+                      return (
+                        <Request
+                          key={request.request_id}
+                          user={user}
+                          onProfileRouteChange={onProfileRouteChange}
+                          request={request}
+                          sendData={sendData}
+                          updatelist={this.updatelist}
+                        />
+                      );
+                    } else return null;
+                  } else {
                     return (
                       <Request
                         key={request.request_id}
@@ -114,23 +128,12 @@ class ManageRequests extends Component {
                         updatelist={this.updatelist}
                       />
                     );
-                  } else return null;
-                } else {
-                  return (
-                    <Request
-                      key={request.request_id}
-                      user={user}
-                      onProfileRouteChange={onProfileRouteChange}
-                      request={request}
-                      sendData={sendData}
-                      updatelist={this.updatelist}
-                    />
-                  );
-                }
-              })}
-            </tbody>
-          </table>
-        </div>
+                  }
+                })}
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
     );
   }
